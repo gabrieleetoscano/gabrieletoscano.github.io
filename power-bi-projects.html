@@ -1,523 +1,269 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Power BI Projects — Gabriele Toscano</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #F7F9FC;
-      --white: #FFFFFF;
-      --border: rgba(15,23,42,0.08);
-      --border-strong: rgba(15,23,42,0.14);
-      --shadow: 0 1px 3px rgba(15,23,42,0.06), 0 4px 16px rgba(15,23,42,0.04);
-      --shadow-hover: 0 4px 12px rgba(15,23,42,0.08), 0 16px 40px rgba(15,23,42,0.07);
-      --blue: #2563EB;
-      --blue-light: #EFF6FF;
-      --blue-mid: #DBEAFE;
-      --cyan: #0891B2;
-      --cyan-light: #ECFEFF;
-      --purple: #7C3AED;
-      --red: #DC2626;
-      --red-light: #FEF2F2;
-      --orange: #EA580C;
-      --orange-light: #FFF7ED;
-      --grad: linear-gradient(135deg, #2563EB 0%, #0891B2 100%);
-      --grad-f1: linear-gradient(135deg, #DC2626 0%, #EA580C 100%);
-      --grad-nba: linear-gradient(135deg, #1D4ED8 0%, #7C3AED 100%);
-      --text: #0F172A;
-      --text-mid: #334155;
-      --muted: #64748B;
-      --divider: #E2E8F0;
-      --font-h: "Syne", sans-serif;
-      --font-b: "DM Sans", sans-serif;
-      --r: 12px;
-      --nav-h: 64px;
-    }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font-b); font-size: 15px; line-height: 1.65; overflow-x: hidden; }
-    ::selection { background: rgba(37,99,235,.15); }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--divider); border-radius: 3px; }
-
-    /* ── NAV ───────────────────────── */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; background: rgba(247,249,252,0.88); backdrop-filter: blur(20px) saturate(1.8); -webkit-backdrop-filter: blur(20px) saturate(1.8); border-bottom: 1px solid var(--border); }
-    .nav-logo { font-family: var(--font-h); font-size: 1.1rem; font-weight: 800; letter-spacing: -.03em; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .nav-links { display: flex; gap: 2px; }
-    .nav-links a { padding: 7px 14px; border-radius: 8px; font-size: .85rem; font-weight: 500; color: var(--muted); transition: .15s; }
-    .nav-links a:hover { color: var(--text); background: rgba(15,23,42,.05); }
-    .nav-links a.active { color: var(--blue); background: var(--blue-light); font-weight: 600; }
-    .nav-cta { display: flex; gap: 8px; }
-    .nav-cta a { display: flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 8px; font-size: .82rem; font-weight: 500; border: 1px solid var(--border); color: var(--muted); background: var(--white); transition: .15s; }
-    .nav-cta a:hover { border-color: var(--border-strong); color: var(--text); box-shadow: var(--shadow); }
-    .nav-cta a.back { background: var(--grad); border: none; color: #fff; font-weight: 600; }
-    .nav-cta a.back:hover { opacity: .9; }
-
-    /* ── PAGE HERO ─────────────────── */
-    .page-hero { padding: calc(var(--nav-h) + 64px) 5vw 48px; max-width: 1200px; margin: 0 auto; }
-    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--muted); margin-bottom: 28px; }
-    .breadcrumb a:hover { color: var(--blue); }
-    .breadcrumb span.sep { color: var(--divider); }
-    .page-badge { display: inline-flex; align-items: center; gap: 7px; padding: 5px 12px; border-radius: 100px; border: 1px solid var(--blue-mid); background: var(--blue-light); font-size: .75rem; font-weight: 700; color: var(--blue); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 20px; }
-    .page-title { font-family: var(--font-h); font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.08; margin-bottom: 16px; }
-    .page-title .grad { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .page-desc { max-width: 560px; font-size: .97rem; color: var(--muted); line-height: 1.78; }
-    .page-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 28px; }
-    .meta-item { display: flex; align-items: center; gap: 7px; font-size: .82rem; color: var(--muted); font-weight: 500; }
-    .meta-item svg { color: var(--blue); flex-shrink: 0; }
-
-    /* ── SECTION SEPARATOR ─────────── */
-    .sec-wrap { max-width: 1200px; margin: 0 auto; padding: 0 5vw; }
-    .hr { border: none; height: 1px; background: var(--divider); margin: 0; }
-    section { padding: 72px 0; }
-
-    /* ── FEATURED PROJECT CARD (F1 & NBA) ─ */
-    .featured-card {
-      background: var(--white); border: 1px solid var(--border); border-radius: 20px;
-      overflow: hidden; box-shadow: var(--shadow); margin-bottom: 32px;
-    }
-    .featured-card:last-child { margin-bottom: 0; }
-
-    /* Accent bar top */
-    .featured-card.f1 { border-top: 3px solid var(--red); }
-    .featured-card.nba { border-top: 3px solid var(--blue); }
-    .featured-card.hr-analytics { border-top: 3px solid var(--purple); }
-    .featured-card.ecommerce { border-top: 3px solid var(--cyan); }
-
-    .fc-body { display: grid; grid-template-columns: 1fr 420px; }
-    @media(max-width: 900px) { .fc-body { grid-template-columns: 1fr; } }
-
-    /* Left: content */
-    .fc-content { padding: 36px 40px; display: flex; flex-direction: column; }
-    .fc-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-    .fc-badge {
-      font-size: .72rem; font-weight: 700; padding: 4px 12px; border-radius: 100px; letter-spacing: .06em; text-transform: uppercase;
-    }
-    .fc-badge.f1 { background: var(--red-light); color: var(--red); border: 1px solid rgba(220,38,38,.2); }
-    .fc-badge.nba { background: var(--blue-light); color: var(--blue); border: 1px solid var(--blue-mid); }
-    .fc-badge.hr { background: var(--purple-light,#F5F3FF); color: var(--purple); border: 1px solid rgba(124,58,237,.2); }
-    .fc-badge.ecomm { background: var(--cyan-light); color: var(--cyan); border: 1px solid rgba(8,145,178,.2); }
-    .fc-badge-tool { font-size: .72rem; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: #F1F5F9; color: var(--muted); border: 1px solid var(--divider); }
-    .fc-title { font-family: var(--font-h); font-size: clamp(1.35rem, 2.5vw, 1.75rem); font-weight: 800; letter-spacing: -.03em; margin-bottom: 12px; line-height: 1.15; }
-    .fc-desc { font-size: .92rem; color: var(--muted); line-height: 1.75; margin-bottom: 24px; flex: 1; }
-    .fc-features { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
-    @media(max-width: 600px) { .fc-features { grid-template-columns: 1fr; } }
-    .fc-feat {
-      display: flex; align-items: flex-start; gap: 10px;
-      padding: 12px 14px; border-radius: 10px;
-      background: var(--bg); border: 1px solid var(--border);
-      font-size: .83rem; color: var(--text-mid);
-    }
-    .fc-feat-icon { width: 20px; height: 20px; border-radius: 5px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: .75rem; margin-top: 1px; }
-    .fc-feat-icon.f1 { background: var(--red-light); }
-    .fc-feat-icon.nba { background: var(--blue-light); }
-    .fc-feat-icon.hr { background: #F5F3FF; }
-    .fc-feat-icon.ecomm { background: var(--cyan-light); }
-    .fc-feat strong { display: block; font-size: .82rem; font-weight: 600; color: var(--text); margin-bottom: 1px; }
-    .fc-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 20px; border-top: 1px solid var(--divider); }
-    .fc-tools { display: flex; gap: 6px; flex-wrap: wrap; }
-    .fc-tool { font-size: .72rem; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: var(--blue-light); border: 1px solid var(--blue-mid); color: var(--blue); }
-    .fc-btn {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 10px 22px; border-radius: 10px; font-size: .86rem; font-weight: 600; color: #fff; transition: .2s; white-space: nowrap; font-family: var(--font-h);
-      letter-spacing: -.01em;
-    }
-    .fc-btn.f1 { background: var(--grad-f1); }
-    .fc-btn.nba { background: var(--grad-nba); }
-    .fc-btn.hr { background: linear-gradient(135deg, #7C3AED, #2563EB); }
-    .fc-btn.ecomm { background: var(--grad); }
-    .fc-btn:hover { opacity: .88; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,.2); }
-
-    /* Right: screenshot */
-    .fc-screenshot {
-      position: relative; overflow: hidden;
-      border-left: 1px solid var(--border);
-      background: #0A0A1A;
-      min-height: 320px;
-    }
-    @media(max-width: 900px) { .fc-screenshot { border-left: none; border-top: 1px solid var(--border); min-height: 220px; } }
-    .fc-screenshot img { width: 100%; height: 100%; object-fit: cover; opacity: .92; transition: transform .5s ease, opacity .3s; }
-    .featured-card:hover .fc-screenshot img { transform: scale(1.03); opacity: 1; }
-    .fc-screenshot-overlay {
-      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-      background: rgba(0,0,0,.35); opacity: 0; transition: opacity .3s; cursor: pointer;
-    }
-    .featured-card:hover .fc-screenshot-overlay { opacity: 1; }
-    .open-pill {
-      display: flex; align-items: center; gap: 7px;
-      padding: 10px 20px; border-radius: 100px;
-      background: rgba(255,255,255,.95); color: var(--text); font-size: .84rem; font-weight: 700;
-      box-shadow: 0 4px 16px rgba(0,0,0,.25); font-family: var(--font-h);
-      transform: translateY(6px); transition: transform .3s;
-    }
-    .featured-card:hover .open-pill { transform: translateY(0); }
-
-    /* ── MINI CARD GRID (Hireaze, NovaMarket) ─ */
-    .mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
-    .mini-card {
-      background: var(--white); border: 1px solid var(--border); border-radius: var(--r);
-      overflow: hidden; box-shadow: var(--shadow); transition: .25s; cursor: pointer;
-    }
-    .mini-card:hover { box-shadow: var(--shadow-hover); border-color: var(--border-strong); transform: translateY(-3px); }
-    .mini-thumb { aspect-ratio: 16/9; overflow: hidden; background: #0A0A1A; position: relative; }
-    .mini-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
-    .mini-card:hover .mini-thumb img { transform: scale(1.04); }
-    .mini-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.3); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .25s; }
-    .mini-card:hover .mini-overlay { opacity: 1; }
-    .mini-pill { display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 100px; background: rgba(255,255,255,.93); color: var(--text); font-size: .8rem; font-weight: 700; font-family: var(--font-h); }
-    .mini-body { padding: 20px 22px; }
-    .mini-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
-    .mini-tag { font-size: .7rem; font-weight: 700; padding: 3px 9px; border-radius: 5px; background: var(--blue-light); border: 1px solid var(--blue-mid); color: var(--blue); letter-spacing: .03em; }
-    .mini-tag.hr { background: #F5F3FF; border-color: rgba(124,58,237,.2); color: var(--purple); }
-    .mini-tag.ecomm { background: var(--cyan-light); border-color: rgba(8,145,178,.2); color: var(--cyan); }
-    .mini-title { font-family: var(--font-h); font-size: 1.05rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: 8px; }
-    .mini-desc { font-size: .86rem; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
-    .mini-footer { display: flex; align-items: center; justify-content: space-between; }
-    .mini-tools { display: flex; gap: 5px; flex-wrap: wrap; }
-    .mini-tool { font-size: .7rem; color: var(--muted); font-weight: 600; }
-    .mini-tool::before { content: "#"; }
-    .mini-cta { display: inline-flex; align-items: center; gap: 5px; padding: 7px 14px; border-radius: 7px; background: var(--grad); color: #fff; font-size: .8rem; font-weight: 600; transition: .2s; flex-shrink: 0; }
-    .mini-cta:hover { opacity: .88; }
-
-    /* ── SECTION HEADER ────────────── */
-    .s-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .16em; color: var(--blue); margin-bottom: 10px; }
-    .s-title { font-family: var(--font-h); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -.035em; margin-bottom: 12px; }
-    .s-desc { color: var(--muted); max-width: 500px; font-size: .93rem; margin-bottom: 40px; }
-
-    /* ── FOOTER ────────────────────── */
-    .site-footer { border-top: 1px solid var(--divider); padding: 36px 5vw; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
-    .site-footer p { font-size: .82rem; color: var(--muted); }
-    .footer-links { display: flex; gap: 18px; }
-    .footer-links a { font-size: .82rem; color: var(--muted); transition: .15s; }
-    .footer-links a:hover { color: var(--blue); }
-
-    /* ── ANIMATIONS ────────────────── */
-    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-    @media(max-width: 768px) { .nav-links { display: none; } .fc-content { padding: 24px 22px; } }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Power BI Projects — Gabriele Toscano</title>
+<meta name="description" content="Selected Power BI dashboards and reports." />
+<link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="home.html" class="nav-logo">GT.</a>
-  <div class="nav-links">
-    <a href="home.html">Home</a>
-    <a href="power-bi-projects.html" class="active">Power BI</a>
-    <a href="data-engineering-projects.html">Data Engineering</a>
-    <a href="python-projects.html">Python</a>
-  </div>
-  <div class="nav-cta">
-    <a href="https://www.linkedin.com/in/gabrieletoscano/" target="_blank">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.554v-5.57c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.668H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      LinkedIn
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="home.html" aria-label="Home">
+      <span class="brand-mark">GT</span>
+      <span class="brand-text">Gabriele Toscano <span>· Data Analyst</span></span>
     </a>
-    <a href="home.html" class="back">← Home</a>
+    <ul class="nav-links">
+      <li><a data-nav="home.html" href="home.html">Home</a></li>
+      <li><a data-nav="power-bi-projects.html" href="power-bi-projects.html">Power BI</a></li>
+      <li><a data-nav="data-engineering-projects.html" href="data-engineering-projects.html">Data Engineering</a></li>
+      <li><a data-nav="python-projects.html" href="python-projects.html">Python</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-primary" href="#" download>Download CV</a>
+      <button class="nav-burger" aria-label="Menu"><svg width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M1 1h16M1 7h16M1 13h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    </div>
+    <ul class="nav-links-m">
+      <li><a data-nav="home.html" href="home.html">Home</a></li>
+      <li><a data-nav="power-bi-projects.html" href="power-bi-projects.html">Power BI Projects</a></li>
+      <li><a data-nav="data-engineering-projects.html" href="data-engineering-projects.html">Data Engineering</a></li>
+      <li><a data-nav="python-projects.html" href="python-projects.html">Python Projects</a></li>
+    </ul>
   </div>
 </nav>
 
-<!-- PAGE HERO -->
-<div class="page-hero">
-  <div class="breadcrumb">
-    <a href="home.html">Home</a>
-    <span class="sep">/</span>
-    <span style="color:var(--text);font-weight:600">Power BI Projects</span>
-  </div>
-  <div class="page-badge">
-    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M21 2H3a1 1 0 00-1 1v18a1 1 0 001 1h18a1 1 0 001-1V3a1 1 0 00-1-1zM8 16H5V8h3v8zm5.5 0h-3V5h3v11zm5.5 0h-3v-6h3v6z"/></svg>
-    Interactive Dashboards
-  </div>
-  <h1 class="page-title">Power BI<br><span class="grad">Projects</span></h1>
-  <p class="page-desc">
-    End-to-end Power BI projects — from motorsport analytics to HR intelligence and e-commerce BI. Each dashboard is designed for clarity, interactivity, and real business impact.
-  </p>
-  <div class="page-meta">
-    <div class="meta-item">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-      4 Projects
-    </div>
-    <div class="meta-item">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      Live Interactive Reports
-    </div>
-    <div class="meta-item">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-      DAX · Power Query · Data Modeling
-    </div>
-  </div>
-</div>
+<main>
 
-<!-- ═══════════════════════════════════════════════════ -->
-<!-- FEATURED: F1 & NBA                                  -->
-<!-- ═══════════════════════════════════════════════════ -->
-<div class="sec-wrap">
-  <section>
-    <div class="s-label fade-in">Featured</div>
-    <h2 class="s-title fade-in">Sports Analytics</h2>
-    <p class="s-desc fade-in">Two passion projects combining real-world sports data with custom Power BI design — built entirely from scratch with branded UI and multi-page architecture.</p>
-
-    <!-- ── F1 CARD ────────────────────────────────────────── -->
-    <div class="featured-card f1 fade-in">
-      <div class="fc-body">
-        <!-- Left -->
-        <div class="fc-content">
-          <div class="fc-meta">
-            <span class="fc-badge f1">Formula 1</span>
-            <span class="fc-badge-tool">Power BI</span>
-            <span class="fc-badge-tool">DAX</span>
-            <span class="fc-badge-tool">Custom UI</span>
-          </div>
-          <h3 class="fc-title">Formula 1 — 2024 Season Analytics</h3>
-          <p class="fc-desc">
-            A personal Power BI project built around my passion for Formula 1, covering the entire 2024 season with a <strong>custom UI designed to match the real F1 visual identity</strong>. The dashboard tracks every race from Bahrain to Abu Dhabi with a strong emphasis on performance storytelling.
-          </p>
-          <div class="fc-features">
-            <div class="fc-feat">
-              <div class="fc-feat-icon f1">🏆</div>
-              <div><strong>Driver Standings</strong>Championship points race across all 24 rounds</div>
-            </div>
-            <div class="fc-feat">
-              <div class="fc-feat-icon f1">🏎️</div>
-              <div><strong>Constructor Battle</strong>Team performance comparison over the season</div>
-            </div>
-            <div class="fc-feat">
-              <div class="fc-feat-icon f1">⏱️</div>
-              <div><strong>Lap Time Analysis</strong>Fastest laps, sector breakdowns per circuit</div>
-            </div>
-            <div class="fc-feat">
-              <div class="fc-feat-icon f1">📍</div>
-              <div><strong>Race Results</strong>Full results and grid positions per Grand Prix</div>
-            </div>
-            <div class="fc-feat">
-              <div class="fc-feat-icon f1">🎨</div>
-              <div><strong>Branded Theme</strong>Custom F1 color palette, typography and icons</div>
-            </div>
-            <div class="fc-feat">
-              <div class="fc-feat-icon f1">📊</div>
-              <div><strong>Multi-page Report</strong>Dedicated page per analytical domain</div>
-            </div>
-          </div>
-          <div class="fc-footer">
-            <div class="fc-tools">
-              <span class="fc-tool">Power BI</span>
-              <span class="fc-tool">DAX</span>
-              <span class="fc-tool">Power Query</span>
-              <span class="fc-tool">Data Modeling</span>
-            </div>
-            <!-- Replace href="#" with your actual Power BI link -->
-            <a href="#" target="_blank" class="fc-btn f1">
-              Open Dashboard
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-        <!-- Right: Screenshot -->
-        <div class="fc-screenshot" onclick="window.open('#','_blank')">
-          <img
-            src="https://lh3.googleusercontent.com/sitesv/AA5AbUDNx1QrKBCQ9ab8i8zx3-5OTQKDAyvx05ktXkP2v9fzRqpno5xOZwhada_hXzwtN6r9E4ZDczksLDMHOPcWEzFbHG_l4ccJdnr0wwpoUFJx9MNAGadJ11eqIiUjxbVU3iep4Vu5H4x6jzC9XDGlyAwBA03sJEQFriRUCJC2cITdLPq969ewJoDHKWzXcjeOjiSZI3I_2Jvv5_K9LForRMiwi4akpvvhNoo9DMY=w1280"
-            alt="Formula 1 2024 Power BI Dashboard"
-            loading="lazy">
-          <div class="fc-screenshot-overlay">
-            <div class="open-pill">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              Open live report
-            </div>
-          </div>
-        </div>
+  <section class="page-header">
+    <div class="container">
+      <div class="reveal">
+        <div class="crumbs"><a href="home.html">Home</a> &nbsp;/&nbsp; Power BI Projects</div>
+        <h1>Power BI <span class="grad-text">Projects</span></h1>
+        <p class="lead">Interactive dashboards and enterprise reports built with Power BI — from executive KPIs to operational deep-dives. Click any card to open the live report.</p>
       </div>
-    </div>
-
-    <!-- ── NBA CARD ───────────────────────────────────────── -->
-    <div class="featured-card nba fade-in">
-      <div class="fc-body">
-        <!-- Left -->
-        <div class="fc-content">
-          <div class="fc-meta">
-            <span class="fc-badge nba">NBA</span>
-            <span class="fc-badge-tool">Power BI</span>
-            <span class="fc-badge-tool">DAX</span>
-            <span class="fc-badge-tool">Multi-page</span>
-          </div>
-          <h3 class="fc-title">NBA — 20 Seasons Performance Analytics</h3>
-          <p class="fc-desc">
-            An interactive multi-page dashboard tracking <strong>NBA team performance, player stats and game results across 20 seasons (2003–2022)</strong>. Built on real league data, the report covers every aspect of the game — from shooting efficiency to championship winning patterns.
-          </p>
-          <div class="fc-features">
-            <div class="fc-feat">
-              <div class="fc-feat-icon nba">🏀</div>
-              <div><strong>Conference Standings</strong>East vs West rankings for all 20 seasons</div>
-            </div>
-            <div class="fc-feat">
-              <div class="fc-feat-icon nba">👤</div>
-              <div><strong>Player Career Stats</strong>Career highlights and season-by-season profiles</div>
-            </div>
-            <div class="fc-feat">
-              <div class="fc-feat-icon nba">⚔️</div>
-              <div><strong>Head-to-Head Matchups</strong>Team vs team historical performance</div>
-            </div>
-            <div class="fc-feat">
-              <div class="fc-feat-icon nba">🎯</div>
-              <div><strong>Shooting Breakdown</strong>FG%, 3PT%, FT% by player and team</div>
-            </div>
-            <div class="fc-feat">
-              <div class="fc-feat-icon nba">📅</div>
-              <div><strong>Game Results</strong>Full box scores and game-level analysis</div>
-            </div>
-            <div class="fc-feat">
-              <div class="fc-feat-icon nba">🏆</div>
-              <div><strong>Championship History</strong>Finals results and dynasty tracking</div>
-            </div>
-          </div>
-          <div class="fc-footer">
-            <div class="fc-tools">
-              <span class="fc-tool">Power BI</span>
-              <span class="fc-tool">DAX</span>
-              <span class="fc-tool">Power Query</span>
-              <span class="fc-tool">Sports Analytics</span>
-            </div>
-            <!-- Replace href="#" with your actual Power BI link -->
-            <a href="#" target="_blank" class="fc-btn nba">
-              Open Dashboard
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-        <!-- Right: Screenshot -->
-        <div class="fc-screenshot" onclick="window.open('#','_blank')">
-          <img
-            src="https://lh3.googleusercontent.com/sitesv/AA5AbUDzIXqCWz7mO8Cu6kO1g9_7hNhJgsLqwBbkLBlTg2Xdfyrm4s3sC6rmj2dfEFK2bTlkmgio0H8_EEzw4XFIoH0KG8rnJiBVenoByuqHOpPsvkZxFuIRQExr6fH-p5bTiAI2i24Q09iXGDfGwu01ljrmHyH9JfxsfjTToJRsYta-wR-v4S6Ecj-p7kFEm4COBERhOcC-LMiObEwt16JI863BDxlT9BCTZA=w1280"
-            alt="NBA Analytics Dashboard"
-            loading="lazy">
-          <div class="fc-screenshot-overlay">
-            <div class="open-pill">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              Open live report
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </section>
-</div>
-
-<div class="sec-wrap"><hr class="hr"></div>
-
-<!-- ═══════════════════════════════════════════════════ -->
-<!-- MORE PROJECTS: Hireaze & NovaMarket                 -->
-<!-- ═══════════════════════════════════════════════════ -->
-<div class="sec-wrap">
-  <section>
-    <div class="s-label fade-in">More Projects</div>
-    <h2 class="s-title fade-in">Business & HR Intelligence</h2>
-    <p class="s-desc fade-in">Real-world BI projects covering human resources analytics and global e-commerce intelligence.</p>
-
-    <div class="mini-grid">
-
-      <!-- Hireaze -->
-      <div class="mini-card fade-in" onclick="window.open('#','_blank')">
-        <div class="mini-thumb">
-          <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUBbFUmkmNukXym4fxV1Xr7Bv2bU_33jUFjl9RQfYibZj3B__yzOc0FSG4B63UB8IuYX_JujavD-BhpF3SpcoKJJ4Auk5uOpzVmykTqLylCqloXRDAC8YuH3XMeUXJ0aQ2AR4slBnT-DaF3VUv8iVaT8YHCI0UPfHSyJD7pgftYbUGrp-aobfWlibrJUUl7ZA5LpeoYw6zKRWoKJvWdc3YQT4dmmDrvRlQD9_Uw=w800"
-            alt="Hireaze HR Analytics" loading="lazy">
-          <div class="mini-overlay">
-            <div class="mini-pill">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              Open Dashboard
-            </div>
-          </div>
-        </div>
-        <div class="mini-body">
-          <div class="mini-tags">
-            <span class="mini-tag hr">HR Analytics</span>
-            <span class="mini-tag">Power BI</span>
-            <span class="mini-tag">Real Data</span>
-          </div>
-          <h3 class="mini-title">Hireaze — Human Resources Analytics</h3>
-          <p class="mini-desc">Interactive HR analytics report built on real employee data — tracking attrition, performance, payroll and workforce insights across departments.</p>
-          <div class="mini-footer">
-            <div class="mini-tools">
-              <span class="mini-tool">PowerBI</span>
-              <span class="mini-tool">DAX</span>
-              <span class="mini-tool">HR</span>
-            </div>
-            <a href="#" target="_blank" class="mini-cta" onclick="event.stopPropagation()">
-              View
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- NovaMarket -->
-      <div class="mini-card fade-in" onclick="window.open('#','_blank')">
-        <div class="mini-thumb">
-          <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUDk1LQkOM2LocMQiwopEf-7jNHmnYBRBvvqaaYaTSRY4qwytRa67v1nTZ278CAGEaxLcT2fXRkXQLdkm4XSCNSsemy3unwomJKeQ33LUPargVzzMnjrDrpxGWuGnq_Z2dR2uUN0Lz69kvhIxGcoUdKm4y88ivuRpcGAFGQ8bItlpcWR_NbkW6xCxR1kJzKk8tqek6pymBihn6VB385bpKDhVJRHwOeJ9sz82VU=w800"
-            alt="NovaMarket E-commerce BI" loading="lazy">
-          <div class="mini-overlay">
-            <div class="mini-pill">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              Open Dashboard
-            </div>
-          </div>
-        </div>
-        <div class="mini-body">
-          <div class="mini-tags">
-            <span class="mini-tag ecomm">E-commerce</span>
-            <span class="mini-tag">Power BI</span>
-            <span class="mini-tag">Strategy</span>
-          </div>
-          <h3 class="mini-title">NovaMarket — E-commerce Intelligence</h3>
-          <p class="mini-desc">BI project analyzing a global e-commerce marketplace across revenue, sellers, customers, operations, and geography — turning transactional data into strategic insights.</p>
-          <div class="mini-footer">
-            <div class="mini-tools">
-              <span class="mini-tool">PowerBI</span>
-              <span class="mini-tool">DAX</span>
-              <span class="mini-tool">eCommerce</span>
-            </div>
-            <a href="#" target="_blank" class="mini-cta" onclick="event.stopPropagation()">
-              View
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
-</div>
 
-<!-- FOOTER -->
-<div style="max-width:1200px;margin:0 auto;">
-  <footer class="site-footer">
-    <p>© 2026 Gabriele Toscano &nbsp;·&nbsp; Data Analyst &nbsp;·&nbsp; Madrid, Spain</p>
+  <section style="padding-top: 16px">
+    <div class="container">
+
+      <div class="filters reveal">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="finance">Finance</button>
+        <button class="filter" data-filter="sales">Sales</button>
+        <button class="filter" data-filter="ops">Operations</button>
+        <button class="filter" data-filter="hr">HR</button>
+        <button class="filter" data-filter="exec">Executive</button>
+      </div>
+
+      <div class="projects-grid">
+
+        <a class="project reveal" data-tags="exec finance" href="https://app.powerbi.com/" target="_blank" rel="noopener">
+          <div class="project-thumb">
+            <span class="badge">Executive</span>
+            <div class="pthumb variant-exec">
+              <div class="row">
+                <div class="cell"><div class="kpi-lbl">Revenue</div><div class="kpi-num grad-text">€2.41M</div></div>
+                <div class="cell"><div class="kpi-lbl">Margin</div><div class="kpi-num">38.4%</div></div>
+                <div class="cell"><div class="kpi-lbl">NPS</div><div class="kpi-num">58</div></div>
+              </div>
+              <div class="row" style="flex:1">
+                <div class="cell tall">
+                  <svg viewBox="0 0 180 80" preserveAspectRatio="none">
+                    <defs><linearGradient id="ge1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6D8BFF" stop-opacity=".6"/><stop offset="1" stop-color="#6D8BFF" stop-opacity="0"/></linearGradient></defs>
+                    <path d="M0,60 L20,52 L40,56 L60,40 L80,44 L100,28 L120,32 L140,18 L160,22 L180,10 L180,80 L0,80 Z" fill="url(#ge1)"/>
+                    <path d="M0,60 L20,52 L40,56 L60,40 L80,44 L100,28 L120,32 L140,18 L160,22 L180,10" stroke="#6D8BFF" fill="none" stroke-width="1.5"/>
+                  </svg>
+                </div>
+                <div class="cell tall">
+                  <svg viewBox="0 0 180 80">
+                    <g fill="#9A7CFF"><rect x="8" y="40" width="10" height="30" rx="2"/><rect x="26" y="28" width="10" height="42" rx="2"/><rect x="44" y="44" width="10" height="26" rx="2"/><rect x="62" y="18" width="10" height="52" rx="2"/><rect x="80" y="34" width="10" height="36" rx="2"/><rect x="98" y="22" width="10" height="48" rx="2"/><rect x="116" y="10" width="10" height="60" rx="2"/><rect x="134" y="26" width="10" height="44" rx="2"/><rect x="152" y="16" width="10" height="54" rx="2"/></g>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M10 7h7v7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="project-body">
+            <h3>Executive KPI Cockpit</h3>
+            <p>A single-screen C-level view of revenue, margin and retention — drill-through by region and business unit.</p>
+            <div class="project-tags"><span>Power BI</span><span>DAX</span><span>Azure SQL</span></div>
+          </div>
+        </a>
+
+        <a class="project reveal d1" data-tags="sales" href="https://app.powerbi.com/" target="_blank" rel="noopener">
+          <div class="project-thumb">
+            <span class="badge">Sales</span>
+            <div class="pthumb variant-sales">
+              <div class="row">
+                <div class="cell"><div class="kpi-lbl">Pipeline</div><div class="kpi-num">€8.2M</div></div>
+                <div class="cell"><div class="kpi-lbl">Win rate</div><div class="kpi-num">24%</div></div>
+              </div>
+              <div class="row" style="flex:1">
+                <div class="cell tall" style="flex: 1.8">
+                  <svg viewBox="0 0 220 90" preserveAspectRatio="none">
+                    <defs><linearGradient id="gs1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6D8BFF"/><stop offset="1" stop-color="#3BD4E4"/></linearGradient></defs>
+                    <rect x="10"  y="10" width="200" height="14" rx="3" fill="url(#gs1)"/>
+                    <rect x="24"  y="30" width="170" height="14" rx="3" fill="url(#gs1)" opacity=".75"/>
+                    <rect x="42"  y="50" width="130" height="14" rx="3" fill="url(#gs1)" opacity=".55"/>
+                    <rect x="62"  y="70" width="90"  height="14" rx="3" fill="url(#gs1)" opacity=".35"/>
+                  </svg>
+                </div>
+                <div class="cell tall">
+                  <div class="kpi-lbl">Top rep</div>
+                  <div class="kpi-num" style="font-size:15px">E. Conti</div>
+                  <div class="kpi-num" style="font-size:11px;color:var(--accent-3); font-family:'JetBrains Mono', monospace">▲ 18% vs Q</div>
+                </div>
+              </div>
+            </div>
+            <div class="open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M10 7h7v7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="project-body">
+            <h3>Sales Pipeline &amp; Funnel</h3>
+            <p>CRM-sourced funnel with weighted pipeline, conversion drop-off and rep-level performance.</p>
+            <div class="project-tags"><span>Power BI</span><span>Salesforce</span><span>Dataflows</span></div>
+          </div>
+        </a>
+
+        <a class="project reveal d2" data-tags="finance" href="https://app.powerbi.com/" target="_blank" rel="noopener">
+          <div class="project-thumb">
+            <span class="badge">Finance</span>
+            <div class="pthumb variant-finance">
+              <div class="row">
+                <div class="cell"><div class="kpi-lbl">OPEX YTD</div><div class="kpi-num">€11.8M</div></div>
+                <div class="cell"><div class="kpi-lbl">vs Budget</div><div class="kpi-num" style="color:#3bd4a4">-3.2%</div></div>
+              </div>
+              <div class="row" style="flex:1">
+                <div class="cell tall">
+                  <svg viewBox="0 0 180 90">
+                    <g stroke="rgba(255,255,255,0.06)"><line x1="0" y1="30" x2="180" y2="30"/><line x1="0" y1="60" x2="180" y2="60"/></g>
+                    <path d="M0,70 Q30,40 60,55 T120,30 T180,20" stroke="#9A7CFF" fill="none" stroke-width="2"/>
+                    <path d="M0,80 Q30,60 60,65 T120,48 T180,38" stroke="#3BD4E4" fill="none" stroke-width="2" stroke-dasharray="3 3"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M10 7h7v7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="project-body">
+            <h3>Financial Performance</h3>
+            <p>Actual vs. budget vs. forecast with variance waterfalls, cost-center drilldown and FX normalisation.</p>
+            <div class="project-tags"><span>Power BI</span><span>DAX</span><span>SAP</span></div>
+          </div>
+        </a>
+
+        <a class="project reveal" data-tags="ops" href="https://app.powerbi.com/" target="_blank" rel="noopener">
+          <div class="project-thumb">
+            <span class="badge">Operations</span>
+            <div class="pthumb variant-ops">
+              <div class="row">
+                <div class="cell"><div class="kpi-lbl">Occupancy</div><div class="kpi-num">86.2%</div></div>
+                <div class="cell"><div class="kpi-lbl">ADR</div><div class="kpi-num">€142</div></div>
+                <div class="cell"><div class="kpi-lbl">RevPAR</div><div class="kpi-num">€122</div></div>
+              </div>
+              <div class="row" style="flex:1">
+                <div class="cell tall">
+                  <svg viewBox="0 0 180 80">
+                    <g fill="#3BD4E4">
+                      <rect x="10" y="30" width="14" height="40" rx="2"/>
+                      <rect x="30" y="22" width="14" height="48" rx="2" opacity=".9"/>
+                      <rect x="50" y="38" width="14" height="32" rx="2" opacity=".7"/>
+                      <rect x="70" y="10" width="14" height="60" rx="2"/>
+                      <rect x="90" y="26" width="14" height="44" rx="2" opacity=".8"/>
+                      <rect x="110" y="18" width="14" height="52" rx="2" opacity=".9"/>
+                      <rect x="130" y="30" width="14" height="40" rx="2" opacity=".7"/>
+                      <rect x="150" y="14" width="14" height="56" rx="2"/>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M10 7h7v7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="project-body">
+            <h3>Hotel Operations Cockpit</h3>
+            <p>Hotel-level occupancy, ADR and RevPAR with pickup analysis and pace vs. last year.</p>
+            <div class="project-tags"><span>Power BI</span><span>PMS API</span><span>Python</span></div>
+          </div>
+        </a>
+
+        <a class="project reveal d1" data-tags="hr" href="https://app.powerbi.com/" target="_blank" rel="noopener">
+          <div class="project-thumb">
+            <span class="badge">HR Analytics</span>
+            <div class="pthumb variant-hr">
+              <div class="row">
+                <div class="cell"><div class="kpi-lbl">Headcount</div><div class="kpi-num">1,284</div></div>
+                <div class="cell"><div class="kpi-lbl">Attrition</div><div class="kpi-num">9.4%</div></div>
+              </div>
+              <div class="row" style="flex:1">
+                <div class="cell tall">
+                  <svg viewBox="0 0 180 80">
+                    <defs><linearGradient id="gh1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff88b8" stop-opacity=".6"/><stop offset="1" stop-color="#ff88b8" stop-opacity="0"/></linearGradient></defs>
+                    <path d="M0,60 L20,50 L40,54 L60,42 L80,46 L100,36 L120,40 L140,28 L160,32 L180,22 L180,80 L0,80 Z" fill="url(#gh1)"/>
+                    <path d="M0,60 L20,50 L40,54 L60,42 L80,46 L100,36 L120,40 L140,28 L160,32 L180,22" stroke="#ff88b8" fill="none" stroke-width="1.8"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M10 7h7v7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="project-body">
+            <h3>People &amp; Attrition</h3>
+            <p>Headcount evolution, voluntary vs involuntary attrition and tenure distribution by department.</p>
+            <div class="project-tags"><span>Power BI</span><span>Workday</span><span>DAX</span></div>
+          </div>
+        </a>
+
+        <a class="project reveal d2" data-tags="ops" href="https://app.powerbi.com/" target="_blank" rel="noopener">
+          <div class="project-thumb">
+            <span class="badge">Supply Chain</span>
+            <div class="pthumb variant-supply">
+              <div class="row">
+                <div class="cell"><div class="kpi-lbl">OTIF</div><div class="kpi-num">94.1%</div></div>
+                <div class="cell"><div class="kpi-lbl">Lead time</div><div class="kpi-num">12.4d</div></div>
+              </div>
+              <div class="row" style="flex:1">
+                <div class="cell tall">
+                  <svg viewBox="0 0 180 80">
+                    <g fill="none" stroke="#ffc073" stroke-width="1.6">
+                      <polyline points="0,60 20,50 40,55 60,40 80,42 100,30 120,34 140,22 160,26 180,18"/>
+                    </g>
+                    <g fill="#ffc073">
+                      <circle cx="20" cy="50" r="2.5"/><circle cx="60" cy="40" r="2.5"/><circle cx="100" cy="30" r="2.5"/><circle cx="140" cy="22" r="2.5"/><circle cx="180" cy="18" r="3"/>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M10 7h7v7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+          <div class="project-body">
+            <h3>Supply Chain Health</h3>
+            <p>On-time-in-full, supplier OTD scorecards and lead-time variability across categories.</p>
+            <div class="project-tags"><span>Power BI</span><span>SAP</span><span>Power Query</span></div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div>© 2026 Gabriele Toscano</div>
     <div class="footer-links">
-      <a href="home.html">Home</a>
-      <a href="data-engineering-projects.html">Data Engineering</a>
-      <a href="python-projects.html">Python</a>
-      <a href="https://www.linkedin.com/in/gabrieletoscano/" target="_blank">LinkedIn</a>
+      <a href="/cdn-cgi/l/email-protection#c6aea3aaaaa986a1a7a4b4afa3aaa3b2a9b5a5a7a8a9e8a2a3b0">Email</a>
+      <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
     </div>
-  </footer>
-</div>
+  </div>
+</footer>
 
-<script>
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), (i % 4) * 100);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
-</script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.js"></script>
 </body>
 </html>
