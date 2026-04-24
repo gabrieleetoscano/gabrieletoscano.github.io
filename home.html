@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gabriele Toscano — Data Analyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F7F9FC;
+      --white: #FFFFFF;
+      --card: #FFFFFF;
+      --border: rgba(15,23,42,0.08);
+      --border-strong: rgba(15,23,42,0.14);
+      --shadow: 0 1px 3px rgba(15,23,42,0.06), 0 4px 16px rgba(15,23,42,0.04);
+      --shadow-hover: 0 4px 12px rgba(15,23,42,0.08), 0 16px 40px rgba(15,23,42,0.07);
+      --blue: #2563EB;
+      --blue-light: #EFF6FF;
+      --blue-mid: #DBEAFE;
+      --cyan: #0891B2;
+      --cyan-light: #ECFEFF;
+      --purple: #7C3AED;
+      --purple-light: #F5F3FF;
+      --green: #059669;
+      --green-light: #ECFDF5;
+      --grad: linear-gradient(135deg, #2563EB 0%, #0891B2 100%);
+      --text: #0F172A;
+      --text-mid: #334155;
+      --muted: #64748B;
+      --subtle: #94A3B8;
+      --divider: #E2E8F0;
+      --font-h: "Syne", sans-serif;
+      --font-b: "DM Sans", sans-serif;
+      --r: 12px;
+      --nav-h: 64px;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-b); font-size: 15px; line-height: 1.65; overflow-x: hidden; }
+    ::selection { background: rgba(37,99,235,.15); color: var(--blue); }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--divider); border-radius: 3px; }
+
+    /* ── NAV ───────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      background: rgba(247,249,252,0.88);
+      backdrop-filter: blur(20px) saturate(1.8);
+      -webkit-backdrop-filter: blur(20px) saturate(1.8);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-h); font-size: 1.1rem; font-weight: 800; letter-spacing: -.03em;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .nav-links { display: flex; gap: 2px; align-items: center; }
+    .nav-links a {
+      padding: 7px 14px; border-radius: 8px; font-size: .85rem; font-weight: 500; color: var(--muted);
+      transition: color .15s, background .15s;
+    }
+    .nav-links a:hover { color: var(--text); background: rgba(15,23,42,.05); }
+    .nav-links a.active { color: var(--blue); background: var(--blue-light); font-weight: 600; }
+    .nav-cta { display: flex; gap: 8px; align-items: center; }
+    .nav-cta a {
+      display: flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 8px; font-size: .82rem; font-weight: 500;
+      border: 1px solid var(--border); color: var(--muted); background: var(--white); transition: .15s;
+    }
+    .nav-cta a:hover { border-color: var(--border-strong); color: var(--text); box-shadow: var(--shadow); }
+    .nav-cta a.cta-primary {
+      background: var(--grad); border: none; color: #fff; font-weight: 600;
+    }
+    .nav-cta a.cta-primary:hover { opacity: .9; box-shadow: 0 4px 14px rgba(37,99,235,.3); transform: translateY(-1px); }
+
+    /* ── HERO ──────────────────────────────────────────── */
+    .hero {
+      padding: calc(var(--nav-h) + 72px) 5vw 80px;
+      max-width: 1200px; margin: 0 auto; position: relative;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 100px;
+      border: 1px solid rgba(8,145,178,.25); background: var(--cyan-light);
+      font-size: .78rem; font-weight: 600; color: var(--cyan); letter-spacing: .05em; text-transform: uppercase;
+      margin-bottom: 28px; width: fit-content;
+    }
+    .hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
+    .hero-title {
+      font-family: var(--font-h); font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800; letter-spacing: -.04em; line-height: 1.05; margin-bottom: 12px; color: var(--text);
+    }
+    .hero-title .grad { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-subtitle {
+      font-family: var(--font-h); font-size: clamp(1.1rem, 2.2vw, 1.5rem); font-weight: 600;
+      color: var(--muted); margin-bottom: 22px; letter-spacing: -.01em;
+    }
+    .hero-desc {
+      max-width: 520px; font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 36px; font-weight: 400;
+    }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 60px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 11px 22px; border-radius: 10px; font-size: .88rem; font-weight: 500; cursor: pointer; transition: .2s;
+    }
+    .btn-primary { background: var(--grad); color: #fff; border: none; font-weight: 600; }
+    .btn-primary:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,.3); }
+    .btn-outline { background: var(--white); color: var(--text-mid); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--border-strong); box-shadow: var(--shadow); transform: translateY(-1px); }
+    .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; }
+    .stat { display: flex; flex-direction: column; }
+    .stat-n { font-family: var(--font-h); font-size: 2rem; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-l { font-size: .78rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .07em; margin-top: 2px; }
+
+    /* ── CONTENT WRAPPER ───────────────────────────────── */
+    .page { max-width: 1200px; margin: 0 auto; padding: 0 5vw; }
+    section { padding: 80px 0; }
+    .s-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .16em; color: var(--blue); margin-bottom: 10px; }
+    .s-title { font-family: var(--font-h); font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 800; letter-spacing: -.035em; color: var(--text); margin-bottom: 14px; line-height: 1.1; }
+    .s-desc { color: var(--muted); max-width: 480px; font-size: .95rem; margin-bottom: 48px; }
+    .hr { border: none; height: 1px; background: var(--divider); }
+
+    /* ── TIMELINE ──────────────────────────────────────── */
+    .timeline { position: relative; display: flex; flex-direction: column; gap: 0; }
+    .timeline::before {
+      content: ""; position: absolute; left: 27px; top: 20px; bottom: 20px; width: 2px;
+      background: linear-gradient(to bottom, var(--blue-mid), var(--divider));
+    }
+    .tl-item { display: grid; grid-template-columns: 54px 1fr; gap: 20px; padding-bottom: 40px; position: relative; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-logo {
+      width: 54px; height: 54px; border-radius: 12px; flex-shrink: 0; position: relative; z-index: 2;
+      background: var(--white); border: 1px solid var(--border); box-shadow: var(--shadow);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .tl-logo img { width: 36px; height: 36px; object-fit: contain; }
+    .tl-logo .fb {
+      font-family: var(--font-h); font-size: .8rem; font-weight: 800; letter-spacing: -.02em;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .tl-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--r);
+      padding: 22px 26px; box-shadow: var(--shadow); transition: .25s;
+    }
+    .tl-card:hover { box-shadow: var(--shadow-hover); border-color: var(--border-strong); transform: translateX(4px); }
+    .tl-head { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+    .tl-role { font-family: var(--font-h); font-size: 1rem; font-weight: 700; letter-spacing: -.01em; }
+    .tl-date {
+      font-size: .75rem; padding: 3px 10px; border-radius: 100px; white-space: nowrap; flex-shrink: 0;
+      background: var(--blue-light); border: 1px solid var(--blue-mid); color: var(--blue); font-weight: 600; letter-spacing: .03em;
+    }
+    .tl-co { font-size: .86rem; font-weight: 600; color: var(--blue); margin-bottom: 10px; }
+    .tl-desc { font-size: .88rem; color: var(--muted); line-height: 1.7; margin-bottom: 14px; }
+    .tag-row { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: .72rem; padding: 3px 9px; border-radius: 6px; font-weight: 600;
+      background: var(--blue-light); border: 1px solid var(--blue-mid); color: var(--blue);
+    }
+
+    /* ── EDUCATION ─────────────────────────────────────── */
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .edu-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--r);
+      padding: 24px; box-shadow: var(--shadow); transition: .25s;
+    }
+    .edu-card:hover { box-shadow: var(--shadow-hover); border-color: var(--border-strong); transform: translateY(-2px); }
+    .edu-logo {
+      width: 48px; height: 48px; border-radius: 10px; background: var(--white); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 18px;
+    }
+    .edu-logo img { width: 34px; height: 34px; object-fit: contain; }
+    .edu-logo .fb { font-family: var(--font-h); font-size: .78rem; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .edu-deg { font-family: var(--font-h); font-size: .98rem; font-weight: 700; letter-spacing: -.01em; margin-bottom: 5px; }
+    .edu-inst { font-size: .84rem; font-weight: 600; color: var(--blue); margin-bottom: 4px; }
+    .edu-loc { font-size: .78rem; color: var(--muted); margin-bottom: 10px; }
+    .edu-desc { font-size: .85rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── CERTIFICATIONS ────────────────────────────────── */
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .cert-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--r);
+      padding: 22px 20px; box-shadow: var(--shadow); transition: .25s; display: flex; flex-direction: column;
+    }
+    .cert-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+    .cert-icon {
+      width: 52px; height: 52px; border-radius: 12px; margin-bottom: 14px;
+      display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--bg);
+      border: 1px solid var(--border);
+    }
+    .cert-icon img { width: 38px; height: 38px; object-fit: contain; }
+    .cert-icon .fb { font-family: var(--font-h); font-size: .78rem; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .cert-id { font-size: .78rem; font-weight: 700; color: var(--blue); letter-spacing: .05em; margin-bottom: 4px; }
+    .cert-name { font-family: var(--font-h); font-size: .92rem; font-weight: 700; margin-bottom: 4px; letter-spacing: -.01em; }
+    .cert-org { font-size: .78rem; color: var(--muted); font-weight: 500; }
+
+    /* ── SKILLS ────────────────────────────────────────── */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+    @media(max-width:900px){ .skills-grid { grid-template-columns: 1fr 1fr; } }
+    .sk-col-title { font-family: var(--font-h); font-size: 1rem; font-weight: 700; margin-bottom: 20px; letter-spacing: -.01em; }
+    .lang-list { display: flex; flex-direction: column; gap: 12px; }
+    .lang-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .lang-name { font-size: .9rem; font-weight: 500; color: var(--text-mid); }
+    .lang-lv {
+      font-size: .72rem; padding: 3px 10px; border-radius: 100px; font-weight: 700; letter-spacing: .04em;
+      background: var(--blue-light); border: 1px solid var(--blue-mid); color: var(--blue);
+    }
+    .lang-lv.native { background: var(--purple-light); border-color: rgba(124,58,237,.2); color: var(--purple); }
+    .pill-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      padding: 8px 14px; border-radius: 8px;
+      background: var(--white); border: 1px solid var(--border); box-shadow: var(--shadow);
+      font-size: .84rem; font-weight: 500; color: var(--text-mid); transition: .15s;
+    }
+    .pill:hover { border-color: var(--blue-mid); color: var(--blue); box-shadow: var(--shadow-hover); }
+    .pill.hard {
+      background: var(--blue-light); border-color: var(--blue-mid); color: var(--blue); font-weight: 600;
+    }
+    .pill.hard:hover { background: #DBEAFE; border-color: rgba(37,99,235,.4); }
+
+    /* ── COURSES ───────────────────────────────────────── */
+    .courses-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .course-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--r);
+      padding: 24px; display: flex; gap: 16px; align-items: flex-start;
+      box-shadow: var(--shadow); transition: .25s;
+    }
+    .course-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+    .course-logo { width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0; overflow: hidden; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; background: var(--white); }
+    .course-logo img { width: 30px; height: 30px; object-fit: contain; }
+    .course-title { font-family: var(--font-h); font-size: .94rem; font-weight: 700; margin-bottom: 3px; }
+    .course-inst { font-size: .82rem; color: var(--blue); font-weight: 600; margin-bottom: 8px; }
+    .course-desc { font-size: .84rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── FOOTER ────────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--divider); padding: 36px 5vw;
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .site-footer p { font-size: .82rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { font-size: .82rem; color: var(--muted); transition: .15s; }
+    .footer-links a:hover { color: var(--blue); }
+
+    /* ── ANIMATIONS ────────────────────────────────────── */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ────────────────────────────────────── */
+    @media(max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-cta .btn-outline { display: none; }
+      .hero-stats { gap: 24px; }
+      .timeline::before { left: 21px; }
+      .tl-item { grid-template-columns: 44px 1fr; gap: 14px; }
+      .tl-logo { width: 44px; height: 44px; }
+      .skills-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="home.html" class="nav-logo">GT.</a>
+  <div class="nav-links">
+    <a href="home.html" class="active">Home</a>
+    <a href="power-bi-projects.html">Power BI</a>
+    <a href="data-engineering-projects.html">Data Engineering</a>
+    <a href="python-projects.html">Python</a>
+  </div>
+  <div class="nav-cta">
+    <a href="https://www.linkedin.com/in/gabrieletoscano/" target="_blank" class="btn-outline">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.554v-5.57c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.668H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://github.com/gabrieletoscano" target="_blank" class="btn-outline">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      GitHub
+    </a>
+    <a href="#" class="cta-primary btn">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      Download CV
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    Open to new opportunities
+  </div>
+  <h1 class="hero-title">
+    <span class="grad">Gabriele</span><br>Toscano
+  </h1>
+  <p class="hero-subtitle">Data Analyst · BI Specialist · Data Engineer</p>
+  <p class="hero-desc">
+    Transforming raw data into clear, actionable intelligence. Specialized in Power BI, SQL, Python and cloud platforms — bridging the gap between data and strategy.
+  </p>
+  <div class="hero-actions">
+    <a href="power-bi-projects.html" class="btn btn-primary">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      View Projects
+    </a>
+    <a href="https://www.linkedin.com/in/gabrieletoscano/" target="_blank" class="btn btn-outline">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.554v-5.57c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.668H9.354V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      Connect on LinkedIn
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-n">3+</span><span class="stat-l">Years in Data</span></div>
+    <div class="stat"><span class="stat-n">4</span><span class="stat-l">Certifications</span></div>
+    <div class="stat"><span class="stat-n">4</span><span class="stat-l">Languages</span></div>
+    <div class="stat"><span class="stat-n">📍</span><span class="stat-l">Madrid, Spain</span></div>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- EXPERIENCE -->
+<section>
+  <div class="s-label fade-in">Career</div>
+  <h2 class="s-title fade-in">Professional Experience</h2>
+  <p class="s-desc fade-in">Building data-driven solutions across engineering, technology and hospitality.</p>
+
+  <div class="timeline">
+
+    <!-- Tecnicas Reunidas -->
+    <div class="tl-item fade-in">
+      <div class="tl-logo">
+        <img src="https://logo.clearbit.com/tecnicasreunidas.es" alt="Tecnicas Reunidas"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="fb" style="display:none">TR</span>
+      </div>
+      <div class="tl-card">
+        <div class="tl-head">
+          <span class="tl-role">Business Intelligence Specialist</span>
+          <span class="tl-date">Mar 2026 — Present</span>
+        </div>
+        <div class="tl-co">Tecnicas Reunidas · Madrid, Spain</div>
+        <p class="tl-desc">Leading data analysis for business reporting and executive decision-making. Designing and maintaining Power BI dashboards for Revenue, Sales, and Operations teams. Translating complex datasets into actionable KPIs for both technical and non-technical stakeholders.</p>
+        <div class="tag-row">
+          <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">SQL</span><span class="tag">Azure</span><span class="tag">Business Intelligence</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ayesa -->
+    <div class="tl-item fade-in">
+      <div class="tl-logo">
+        <img src="https://logo.clearbit.com/ayesa.com" alt="Ayesa"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="fb" style="display:none">AY</span>
+      </div>
+      <div class="tl-card">
+        <div class="tl-head">
+          <span class="tl-role">Data Analyst</span>
+          <span class="tl-date">Jul 2025 — Mar 2026</span>
+        </div>
+        <div class="tl-co">Ayesa · Madrid, Spain</div>
+        <p class="tl-desc">Delivered data analysis and business intelligence solutions for enterprise clients. Built automated reporting pipelines and interactive dashboards, collaborating with Revenue, Sales, and Operations to drive data-led strategy.</p>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">Power BI</span><span class="tag">SQL</span><span class="tag">Data Analysis</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Minor Hotels -->
+    <div class="tl-item fade-in">
+      <div class="tl-logo">
+        <img src="https://logo.clearbit.com/minorhotels.com" alt="Minor Hotels"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="fb" style="display:none">MH</span>
+      </div>
+      <div class="tl-card">
+        <div class="tl-head">
+          <span class="tl-role">Groups &amp; Sales Manager</span>
+          <span class="tl-date">Feb 2022 — Jun 2025</span>
+        </div>
+        <div class="tl-co">Minor Hotels · Madrid, Spain</div>
+        <p class="tl-desc">Managed international group bookings and sales strategy. Applied data analysis to optimize revenue yield, track commercial KPIs, and support strategic decisions across Sales and Revenue Management departments.</p>
+        <div class="tag-row">
+          <span class="tag">Revenue Analysis</span><span class="tag">Excel</span><span class="tag">CRM</span><span class="tag">Sales Strategy</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- EDUCATION -->
+<section>
+  <div class="s-label fade-in">Academia</div>
+  <h2 class="s-title fade-in">Education</h2>
+  <p class="s-desc fade-in">Academic foundations in data science, languages, and business management.</p>
+
+  <div class="edu-grid">
+    <div class="edu-card fade-in">
+      <div class="edu-logo">
+        <img src="https://logo.clearbit.com/universidadeuropea.com" alt="Universidad Europea"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="fb" style="display:none">UE</span>
+      </div>
+      <div class="edu-deg">Bachelor's in Data Science</div>
+      <div class="edu-inst">Universidad Europea</div>
+      <div class="edu-loc">📍 Madrid, Spain</div>
+      <p class="edu-desc">Statistics, machine learning, and data analysis. Trained to transform complex data into actionable insights using programming, visualization, and predictive modeling.</p>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-logo">
+        <img src="https://logo.clearbit.com/ucm.es" alt="Universidad Complutense"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="fb" style="display:none">UCM</span>
+      </div>
+      <div class="edu-deg">Bachelor's in Modern Languages</div>
+      <div class="edu-inst">Universidad Complutense de Madrid</div>
+      <div class="edu-loc">📍 Madrid, Spain</div>
+      <p class="edu-desc">Focus on Chinese language and culture. Strong skills in cross-cultural communication, translation, and linguistic analysis.</p>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-logo">
+        <span class="fb">ITB</span>
+      </div>
+      <div class="edu-deg">High School Diploma — Marketing &amp; Finance</div>
+      <div class="edu-inst">Istituto Tecnico Sallustio Bandini</div>
+      <div class="edu-loc">📍 Siena, Italy</div>
+      <p class="edu-desc">Business strategy, accounting, marketing, and commercial communication. Foundations in financial analysis and enterprise management.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- CERTIFICATIONS -->
+<section>
+  <div class="s-label fade-in">Credentials</div>
+  <h2 class="s-title fade-in">Certifications</h2>
+  <p class="s-desc fade-in">Industry-recognized qualifications in data, cloud, and project management.</p>
+
+  <div class="cert-grid">
+
+    <div class="cert-card fade-in">
+      <div class="cert-icon">
+        <!-- Microsoft logo SVG inline -->
+        <svg width="36" height="36" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="9" height="9" fill="#F25022"/>
+          <rect x="11" y="1" width="9" height="9" fill="#7FBA00"/>
+          <rect x="1" y="11" width="9" height="9" fill="#00A4EF"/>
+          <rect x="11" y="11" width="9" height="9" fill="#FFB900"/>
+        </svg>
+      </div>
+      <div class="cert-id">PL-300</div>
+      <div class="cert-name">Power BI Data Analyst</div>
+      <div class="cert-org">Microsoft Certified</div>
+    </div>
+
+    <div class="cert-card fade-in">
+      <div class="cert-icon">
+        <svg width="36" height="36" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="9" height="9" fill="#F25022"/>
+          <rect x="11" y="1" width="9" height="9" fill="#7FBA00"/>
+          <rect x="1" y="11" width="9" height="9" fill="#00A4EF"/>
+          <rect x="11" y="11" width="9" height="9" fill="#FFB900"/>
+        </svg>
+      </div>
+      <div class="cert-id">DP-900</div>
+      <div class="cert-name">Azure Data Fundamentals</div>
+      <div class="cert-org">Microsoft Certified</div>
+    </div>
+
+    <div class="cert-card fade-in">
+      <div class="cert-icon">
+        <svg width="36" height="36" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="9" height="9" fill="#F25022"/>
+          <rect x="11" y="1" width="9" height="9" fill="#7FBA00"/>
+          <rect x="1" y="11" width="9" height="9" fill="#00A4EF"/>
+          <rect x="11" y="11" width="9" height="9" fill="#FFB900"/>
+        </svg>
+      </div>
+      <div class="cert-id">MO-211</div>
+      <div class="cert-name">Excel Expert</div>
+      <div class="cert-org">Microsoft Office Specialist</div>
+    </div>
+
+    <div class="cert-card fade-in">
+      <div class="cert-icon" style="background:#FEF2F2; border-color:rgba(220,38,38,.15);">
+        <!-- PMI logo -->
+        <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="19" stroke="#DC2626" stroke-width="2"/>
+          <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" fill="#DC2626" font-weight="800" font-size="11" font-family="Arial,sans-serif">PMI</text>
+        </svg>
+      </div>
+      <div class="cert-id" style="color:#DC2626">PMI Ready</div>
+      <div class="cert-name">Project Management Ready</div>
+      <div class="cert-org">Project Management Institute</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- SKILLS -->
+<section>
+  <div class="s-label fade-in">Competencies</div>
+  <h2 class="s-title fade-in">Skills &amp; Languages</h2>
+  <p class="s-desc fade-in">Technical depth paired with cross-cultural communication across four languages.</p>
+
+  <div class="skills-grid">
+    <div class="fade-in">
+      <div class="sk-col-title">Languages</div>
+      <div class="lang-list">
+        <div class="lang-item"><span class="lang-name">🇮🇹 Italian</span><span class="lang-lv native">Native</span></div>
+        <div class="lang-item"><span class="lang-name">🇪🇸 Spanish</span><span class="lang-lv">C2</span></div>
+        <div class="lang-item"><span class="lang-name">🇬🇧 English</span><span class="lang-lv">C1</span></div>
+        <div class="lang-item"><span class="lang-name">🇨🇳 Chinese</span><span class="lang-lv">B1</span></div>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="sk-col-title">Soft Skills</div>
+      <div class="pill-grid">
+        <span class="pill">Teamwork</span>
+        <span class="pill">Problem Solving</span>
+        <span class="pill">Critical Thinking</span>
+        <span class="pill">Attention to Detail</span>
+        <span class="pill">Adaptability</span>
+        <span class="pill">Communication</span>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="sk-col-title">Technical Stack</div>
+      <div class="pill-grid">
+        <span class="pill hard">Power BI</span>
+        <span class="pill hard">DAX</span>
+        <span class="pill hard">PL / SQL</span>
+        <span class="pill hard">Python</span>
+        <span class="pill hard">PySpark</span>
+        <span class="pill hard">Excel Expert</span>
+        <span class="pill hard">Google Cloud</span>
+        <span class="pill hard">BigQuery</span>
+        <span class="pill hard">Azure</span>
+        <span class="pill hard">ETL / ELT</span>
+        <span class="pill hard">Data Modeling</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- COURSES -->
+<section>
+  <div class="s-label fade-in">Learning</div>
+  <h2 class="s-title fade-in">Additional Courses</h2>
+  <p class="s-desc fade-in">Continuous learning from world-class institutions.</p>
+
+  <div class="courses-grid">
+    <div class="course-card fade-in">
+      <div class="course-logo">
+        <!-- Google G logo inline SVG -->
+        <svg width="28" height="28" viewBox="0 0 24 24">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+      </div>
+      <div>
+        <div class="course-title">Advanced Data Analytics</div>
+        <div class="course-inst">Google · Coursera</div>
+        <p class="course-desc">End-to-end data analysis: cleaning, EDA, regression modeling, and data storytelling with Python.</p>
+      </div>
+    </div>
+    <div class="course-card fade-in">
+      <div class="course-logo">
+        <img src="https://logo.clearbit.com/umich.edu" alt="University of Michigan"
+          onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<span style=\'font-weight:800;font-size:.7rem;color:var(--blue)\'>UMich</span>')">
+      </div>
+      <div>
+        <div class="course-title">BI Essentials for Finance Analysts</div>
+        <div class="course-inst">University of Michigan, Ann Arbor</div>
+        <p class="course-desc">Business intelligence for financial analysis: dashboards, KPIs, and data-driven frameworks for finance teams.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /page -->
+
+<!-- FOOTER -->
+<div style="max-width:1200px;margin:0 auto;">
+  <footer class="site-footer">
+    <p>© 2026 Gabriele Toscano &nbsp;·&nbsp; Data Analyst &nbsp;·&nbsp; Madrid, Spain</p>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/gabrieletoscano/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/gabrieletoscano" target="_blank">GitHub</a>
+      <a href="power-bi-projects.html">Power BI</a>
+      <a href="data-engineering-projects.html">Data Engineering</a>
+      <a href="python-projects.html">Python</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), (i % 5) * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

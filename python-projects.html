@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Projects — Gabriele Toscano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F7F9FC; --white: #FFFFFF; --border: rgba(15,23,42,0.08); --border-strong: rgba(15,23,42,0.14);
+      --shadow: 0 1px 3px rgba(15,23,42,0.06), 0 4px 16px rgba(15,23,42,0.04);
+      --shadow-hover: 0 4px 12px rgba(15,23,42,0.08), 0 16px 40px rgba(15,23,42,0.07);
+      --blue: #2563EB; --blue-light: #EFF6FF; --blue-mid: #DBEAFE;
+      --purple: #7C3AED; --purple-light: #F5F3FF; --purple-mid: #DDD6FE;
+      --cyan: #0891B2;
+      --grad: linear-gradient(135deg,#2563EB 0%,#0891B2 100%);
+      --grad-py: linear-gradient(135deg,#7C3AED 0%,#2563EB 100%);
+      --text: #0F172A; --text-mid: #334155; --muted: #64748B; --divider: #E2E8F0;
+      --font-h: "Syne",sans-serif; --font-b: "DM Sans",sans-serif; --r: 12px; --nav-h: 64px;
+
+      /* Code block syntax */
+      --code-bg: #1E1E2E; --code-text: #CDD6F4; --code-comment: #6C7086;
+      --code-kw: #89DCEB; --code-str: #A6E3A1; --code-fn: #F9E2AF; --code-num: #FAB387;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-b);font-size:15px;line-height:1.65;overflow-x:hidden;}
+    ::selection{background:rgba(124,58,237,.15);}
+    a{color:inherit;text-decoration:none;} img{display:block;max-width:100%;}
+    ::-webkit-scrollbar{width:6px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--divider);border-radius:3px;}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(247,249,252,0.88);backdrop-filter:blur(20px) saturate(1.8);-webkit-backdrop-filter:blur(20px) saturate(1.8);border-bottom:1px solid var(--border);}
+    .nav-logo{font-family:var(--font-h);font-size:1.1rem;font-weight:800;letter-spacing:-.03em;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .nav-links{display:flex;gap:2px;}
+    .nav-links a{padding:7px 14px;border-radius:8px;font-size:.85rem;font-weight:500;color:var(--muted);transition:.15s;}
+    .nav-links a:hover{color:var(--text);background:rgba(15,23,42,.05);}
+    .nav-links a.active{color:var(--purple);background:var(--purple-light);font-weight:600;}
+    .nav-cta{display:flex;gap:8px;}
+    .nav-cta a{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-size:.82rem;font-weight:500;border:1px solid var(--border);color:var(--muted);background:var(--white);transition:.15s;}
+    .nav-cta a:hover{border-color:var(--border-strong);color:var(--text);}
+    .nav-cta a.back{background:var(--grad);border:none;color:#fff;font-weight:600;}
+
+    .page-hero{padding:calc(var(--nav-h) + 64px) 5vw 48px;max-width:1200px;margin:0 auto;}
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted);margin-bottom:28px;}
+    .breadcrumb a:hover{color:var(--purple);}
+    .breadcrumb span.sep{color:var(--divider);}
+    .page-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:100px;border:1px solid var(--purple-mid);background:var(--purple-light);font-size:.75rem;font-weight:700;color:var(--purple);letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px;}
+    .page-title{font-family:var(--font-h);font-size:clamp(2rem,4.5vw,3.5rem);font-weight:800;letter-spacing:-.04em;line-height:1.08;margin-bottom:16px;}
+    .page-title .grad{background:var(--grad-py);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .page-desc{max-width:540px;font-size:.97rem;color:var(--muted);line-height:1.78;}
+
+    .sec-wrap{max-width:1200px;margin:0 auto;padding:0 5vw;}
+    section{padding:72px 0;}
+    .hr{border:none;height:1px;background:var(--divider);}
+    .s-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--purple);margin-bottom:10px;}
+    .s-title{font-family:var(--font-h);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;letter-spacing:-.035em;margin-bottom:12px;}
+    .s-desc{color:var(--muted);max-width:500px;font-size:.93rem;margin-bottom:40px;}
+
+    .coming-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:72px 60px;display:flex;flex-direction:column;align-items:center;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+    .coming-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(124,58,237,.05) 0%,transparent 70%);}
+    .coming-icon{width:76px;height:76px;border-radius:18px;background:var(--purple-light);border:1px solid var(--purple-mid);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:28px;}
+    .coming-title{font-family:var(--font-h);font-size:2rem;font-weight:800;letter-spacing:-.04em;margin-bottom:14px;}
+    .coming-desc{font-size:.96rem;color:var(--muted);max-width:460px;line-height:1.78;margin-bottom:44px;}
+    .tech-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:18px;}
+    .tech-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:44px;}
+    .tech-pill{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:10px;background:var(--white);border:1px solid var(--border);box-shadow:var(--shadow);font-size:.84rem;font-weight:600;color:var(--text-mid);transition:.15s;}
+    .tech-pill:hover{border-color:var(--purple-mid);color:var(--purple);box-shadow:var(--shadow-hover);}
+    .tech-dot{width:7px;height:7px;border-radius:50%;background:var(--purple);flex-shrink:0;}
+    .cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:10px;background:var(--grad-py);color:#fff;font-size:.9rem;font-weight:600;font-family:var(--font-h);transition:opacity .2s,transform .2s;}
+    .cta-btn:hover{opacity:.88;transform:translateY(-2px);box-shadow:0 6px 20px rgba(124,58,237,.28);}
+
+    /* Library cards */
+    .lib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin-bottom:40px;}
+    .lib-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:22px;box-shadow:var(--shadow);transition:.25s;}
+    .lib-card:hover{box-shadow:var(--shadow-hover);border-color:var(--purple-mid);transform:translateY(-2px);}
+    .lib-mono{font-family:monospace;font-size:.78rem;font-weight:700;padding:4px 10px;border-radius:6px;background:var(--purple-light);border:1px solid var(--purple-mid);color:var(--purple);letter-spacing:.06em;display:inline-block;margin-bottom:12px;}
+    .lib-name{font-family:var(--font-h);font-size:.95rem;font-weight:700;margin-bottom:8px;letter-spacing:-.01em;}
+    .lib-desc{font-size:.85rem;color:var(--muted);line-height:1.65;}
+
+    /* Code block */
+    .code-wrap{
+      background:var(--code-bg);border:1px solid rgba(124,58,237,.15);border-radius:14px;
+      overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.12);
+    }
+    .code-header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:12px 20px;border-bottom:1px solid rgba(255,255,255,.06);
+      background:rgba(255,255,255,.03);
+    }
+    .code-dots{display:flex;gap:6px;}
+    .code-dot{width:10px;height:10px;border-radius:50%;}
+    .code-dot:nth-child(1){background:#FF5F57;}
+    .code-dot:nth-child(2){background:#FFBD2E;}
+    .code-dot:nth-child(3){background:#28C840;}
+    .code-filename{font-family:monospace;font-size:.78rem;color:#6C7086;letter-spacing:.04em;}
+    .code-body{padding:24px;font-family:'JetBrains Mono','Fira Code','Courier New',monospace;font-size:.82rem;line-height:1.85;color:var(--code-text);overflow-x:auto;}
+    .ck{color:var(--code-kw);}
+    .cs{color:var(--code-str);}
+    .cf{color:var(--code-fn);}
+    .cn{color:var(--code-num);}
+    .cc{color:var(--code-comment);font-style:italic;}
+
+    .site-footer{border-top:1px solid var(--divider);padding:36px 5vw;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+    .site-footer p{font-size:.82rem;color:var(--muted);}
+    .footer-links{display:flex;gap:18px;}
+    .footer-links a{font-size:.82rem;color:var(--muted);transition:.15s;}
+    .footer-links a:hover{color:var(--purple);}
+
+    .fade-in{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease;}
+    .fade-in.visible{opacity:1;transform:translateY(0);}
+
+    @media(max-width:768px){.nav-links{display:none;}.coming-card{padding:40px 24px;}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="home.html" class="nav-logo">GT.</a>
+  <div class="nav-links">
+    <a href="home.html">Home</a>
+    <a href="power-bi-projects.html">Power BI</a>
+    <a href="data-engineering-projects.html">Data Engineering</a>
+    <a href="python-projects.html" class="active">Python</a>
+  </div>
+  <div class="nav-cta">
+    <a href="https://github.com/gabrieletoscano" target="_blank">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      GitHub
+    </a>
+    <a href="home.html" class="back">← Home</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="home.html">Home</a>
+    <span class="sep">/</span>
+    <span style="color:var(--text);font-weight:600">Python Projects</span>
+  </div>
+  <div class="page-badge">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+    Python · ML · Data Science
+  </div>
+  <h1 class="page-title">Python<br><span class="grad">Projects</span></h1>
+  <p class="page-desc">Data science notebooks, machine learning models, statistical analysis and automation scripts. Projects coming soon — follow on GitHub for updates.</p>
+</div>
+
+<div class="sec-wrap">
+  <section>
+    <div class="coming-card fade-in">
+      <div class="coming-icon">🐍</div>
+      <h2 class="coming-title">Projects dropping soon</h2>
+      <p class="coming-desc">Python projects — covering exploratory data analysis, machine learning, data visualization, automation and statistical modeling — are being prepared and will be published with full notebooks and GitHub links.</p>
+      <div class="tech-label">Libraries & Frameworks</div>
+      <div class="tech-grid">
+        <span class="tech-pill"><span class="tech-dot"></span>Pandas</span>
+        <span class="tech-pill"><span class="tech-dot"></span>NumPy</span>
+        <span class="tech-pill"><span class="tech-dot"></span>Scikit-learn</span>
+        <span class="tech-pill"><span class="tech-dot"></span>Matplotlib</span>
+        <span class="tech-pill"><span class="tech-dot"></span>Seaborn</span>
+        <span class="tech-pill"><span class="tech-dot"></span>PySpark</span>
+        <span class="tech-pill"><span class="tech-dot"></span>TensorFlow</span>
+        <span class="tech-pill"><span class="tech-dot"></span>Jupyter</span>
+      </div>
+      <a href="https://github.com/gabrieletoscano" target="_blank" class="cta-btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        View GitHub Profile
+      </a>
+    </div>
+  </section>
+</div>
+
+<div class="sec-wrap"><hr class="hr"></div>
+
+<div class="sec-wrap">
+  <section>
+    <div class="s-label fade-in">Stack</div>
+    <h2 class="s-title fade-in">Python Expertise</h2>
+    <p class="s-desc fade-in">Core data science and engineering libraries used across all projects.</p>
+
+    <div class="lib-grid">
+      <div class="lib-card fade-in">
+        <span class="lib-mono">pandas</span>
+        <div class="lib-name">Data Wrangling</div>
+        <p class="lib-desc">Advanced manipulation: merging, reshaping, time-series, complex aggregations on large datasets.</p>
+      </div>
+      <div class="lib-card fade-in">
+        <span class="lib-mono">sklearn</span>
+        <div class="lib-name">Machine Learning</div>
+        <p class="lib-desc">Supervised and unsupervised models — regression, classification, clustering, cross-validation and tuning.</p>
+      </div>
+      <div class="lib-card fade-in">
+        <span class="lib-mono">matplotlib</span>
+        <div class="lib-name">Data Visualization</div>
+        <p class="lib-desc">Statistical charts, heatmaps, and EDA visualizations that communicate insight to stakeholders.</p>
+      </div>
+      <div class="lib-card fade-in">
+        <span class="lib-mono">pyspark</span>
+        <div class="lib-name">Distributed Processing</div>
+        <p class="lib-desc">Big data transformation at scale with PySpark, integrated with Google Cloud and Azure data platforms.</p>
+      </div>
+    </div>
+
+    <!-- Code block -->
+    <div class="code-wrap fade-in">
+      <div class="code-header">
+        <div class="code-dots">
+          <div class="code-dot"></div>
+          <div class="code-dot"></div>
+          <div class="code-dot"></div>
+        </div>
+        <span class="code-filename">analysis.py &nbsp;·&nbsp; pandas · scikit-learn · matplotlib</span>
+        <span style="width:60px"></span>
+      </div>
+      <div class="code-body"><span class="cc"># Gabriele Toscano · Data Analyst · Python Stack</span>
+<span class="ck">import</span> pandas <span class="ck">as</span> pd
+<span class="ck">import</span> numpy <span class="ck">as</span> np
+<span class="ck">import</span> matplotlib.pyplot <span class="ck">as</span> plt
+<span class="ck">from</span> sklearn.model_selection <span class="ck">import</span> train_test_split
+<span class="ck">from</span> sklearn.ensemble <span class="ck">import</span> RandomForestClassifier
+<span class="ck">from</span> sklearn.metrics <span class="ck">import</span> classification_report
+
+<span class="cc"># ── Load & explore dataset ───────────────────────────────</span>
+df = pd.<span class="cf">read_csv</span>(<span class="cs">"dataset.csv"</span>)
+<span class="cf">print</span>(df.<span class="cf">describe</span>())
+<span class="cf">print</span>(<span class="cs">f"Shape: {df.shape} | Nulls: {df.isnull().sum().sum()}"</span>)
+
+<span class="cc"># ── Feature engineering ─────────────────────────────────</span>
+X = df.<span class="cf">drop</span>(<span class="cs">"target"</span>, axis=<span class="cn">1</span>)
+y = df[<span class="cs">"target"</span>]
+
+<span class="cc"># ── Train / test split ───────────────────────────────────</span>
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=<span class="cn">0.2</span>, random_state=<span class="cn">42</span>, stratify=y
+)
+
+<span class="cc"># ── Model training ───────────────────────────────────────</span>
+model = <span class="cf">RandomForestClassifier</span>(n_estimators=<span class="cn">200</span>, max_depth=<span class="cn">8</span>)
+model.<span class="cf">fit</span>(X_train, y_train)
+y_pred = model.<span class="cf">predict</span>(X_test)
+
+<span class="cf">print</span>(<span class="cf">classification_report</span>(y_test, y_pred))
+<span class="cf">print</span>(<span class="cs">f"Accuracy: {model.score(X_test, y_test):.4f}"</span>)
+      </div>
+    </div>
+  </section>
+</div>
+
+<div style="max-width:1200px;margin:0 auto;">
+  <footer class="site-footer">
+    <p>© 2026 Gabriele Toscano &nbsp;·&nbsp; Data Analyst &nbsp;·&nbsp; Madrid, Spain</p>
+    <div class="footer-links">
+      <a href="home.html">Home</a>
+      <a href="power-bi-projects.html">Power BI</a>
+      <a href="data-engineering-projects.html">Data Engineering</a>
+      <a href="https://github.com/gabrieletoscano" target="_blank">GitHub</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e,i)=>{ if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),(i%4)*100);obs.unobserve(e.target);} });
+  }, {threshold:0.08});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
