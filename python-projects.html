@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Python Projects — Gabriele Toscano</title>
+<meta name="description" content="Python projects — data wrangling, automation, ML experiments and APIs." />
 <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -21,9 +22,17 @@
       <li><a data-nav="python-projects.html" href="python-projects.html">Python</a></li>
     </ul>
     <div class="nav-cta">
-      <a class="btn btn-ghost" href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-primary" href="#" download>Download CV</a>
-      <button class="nav-burger" aria-label="Menu"><svg width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M1 1h16M1 7h16M1 13h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/gabriele-toscano-928188234/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 4.97 8.5 2.5 2.5 0 0 1 4.98 3.5ZM3 9.75h4V21H3V9.75ZM9.5 9.75h3.83v1.54h.05c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.66 4.8 6.13V21h-4v-4.7c0-1.12-.02-2.56-1.56-2.56-1.56 0-1.8 1.22-1.8 2.48V21h-4V9.75Z"/></svg>
+        LinkedIn
+      </a>
+      <a class="btn btn-primary" href="#" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download CV
+      </a>
+      <button class="nav-burger" aria-label="Menu">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M1 1h16M1 7h16M1 13h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
     </div>
     <ul class="nav-links-m">
       <li><a data-nav="home.html" href="home.html">Home</a></li>
@@ -41,200 +50,35 @@
       <div class="reveal">
         <div class="crumbs"><a href="home.html">Home</a> &nbsp;/&nbsp; Python Projects</div>
         <h1>Python <span class="grad-text">Projects</span></h1>
-        <p class="lead">Scripts, notebooks and small services — data wrangling, automation, ML experiments and lightweight APIs.</p>
+        <p class="lead">Scripts, notebooks and automation tools — data wrangling, ML experiments and lightweight APIs.</p>
       </div>
     </div>
   </section>
 
-  <section style="padding-top: 16px">
+  <section style="padding-top: 0; padding-bottom: 96px;">
     <div class="container">
-
-      <div class="filters reveal">
-        <button class="filter active" data-filter="all">All</button>
-        <button class="filter" data-filter="ml">Machine Learning</button>
-        <button class="filter" data-filter="automation">Automation</button>
-        <button class="filter" data-filter="api">APIs</button>
-        <button class="filter" data-filter="analysis">Analysis</button>
-      </div>
-
-      <div class="projects-grid">
-
-        <a class="project reveal" data-tags="ml analysis" href="https://github.com/" target="_blank" rel="noopener">
-          <div class="project-thumb">
-            <span class="badge">Machine Learning</span>
-            <div class="codethumb">
-<span class="cm"># churn_model.py</span><br/>
-<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> GradientBoostingClassifier<br/>
-<span class="kw">from</span> sklearn.model_selection <span class="kw">import</span> train_test_split<br/>
-<br/>
-X_train, X_test, y_train, y_test = <span class="df">train_test_split</span>(<br/>
-&nbsp;&nbsp;X, y, test_size=<span class="num">0.2</span>, stratify=y<br/>
-)<br/>
-model = <span class="df">GradientBoostingClassifier</span>(<br/>
-&nbsp;&nbsp;n_estimators=<span class="num">300</span>,<br/>
-&nbsp;&nbsp;learning_rate=<span class="num">0.05</span>,<br/>
-&nbsp;&nbsp;max_depth=<span class="num">4</span>,<br/>
-)<br/>
-model.<span class="fn">fit</span>(X_train, y_train)<br/>
-<span class="df">print</span>(<span class="st">f"AUC: </span>{<span class="fn">roc_auc_score</span>(y_test, model.<span class="fn">predict_proba</span>(X_test)[:, <span class="num">1</span>])<span class="st">:.3f}"</span>)
-            </div>
-            <div class="open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M10 7h7v7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="coming-soon-wrap reveal">
+        <div class="coming-soon-card">
+          <div class="coming-soon-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 4l-4 16"/>
+            </svg>
           </div>
-          <div class="project-body">
-            <h3>Customer Churn Prediction</h3>
-            <p>Gradient-boosting churn model with SHAP explainability and calibration — AUC 0.89 on hold-out.</p>
-            <div class="project-tags"><span>scikit-learn</span><span>SHAP</span><span>pandas</span></div>
+          <span class="eyebrow">Coming Soon</span>
+          <h2 style="margin-top: 14px;">Projects in preparation</h2>
+          <p style="margin-top: 14px;">Python projects — data automation, machine learning experiments, pandas pipelines and small APIs — are currently being organised and will be published here shortly.</p>
+          <div class="coming-soon-label" style="margin-top: 36px;">Technologies</div>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">pandas</span>
+            <span class="chip">NumPy</span>
+            <span class="chip">scikit-learn</span>
+            <span class="chip">FastAPI</span>
+            <span class="chip">Jupyter</span>
+            <span class="chip">Plotly</span>
+            <span class="chip">asyncio</span>
           </div>
-        </a>
-
-        <a class="project reveal d1" data-tags="automation api" href="https://github.com/" target="_blank" rel="noopener">
-          <div class="project-thumb">
-            <span class="badge">Automation</span>
-            <div class="codethumb">
-<span class="cm"># powerbi_refresh.py</span><br/>
-<span class="kw">import</span> requests, os<br/>
-<br/>
-<span class="kw">def</span> <span class="df">refresh_dataset</span>(workspace_id, dataset_id, token):<br/>
-&nbsp;&nbsp;url = <span class="st">f"https://api.powerbi.com/v1.0/myorg/"</span> \<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="st">f"groups/{workspace_id}/"</span> \<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="st">f"datasets/{dataset_id}/refreshes"</span><br/>
-&nbsp;&nbsp;r = requests.<span class="fn">post</span>(url, headers={<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="st">"Authorization"</span>: <span class="st">f"Bearer {token}"</span><br/>
-&nbsp;&nbsp;})<br/>
-&nbsp;&nbsp;r.<span class="fn">raise_for_status</span>()<br/>
-&nbsp;&nbsp;<span class="kw">return</span> r.status_code
-            </div>
-            <div class="open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M10 7h7v7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          </div>
-          <div class="project-body">
-            <h3>Power BI Refresh Orchestrator</h3>
-            <p>CLI tool to trigger, monitor and retry Power BI dataset refreshes with exponential back-off.</p>
-            <div class="project-tags"><span>Python</span><span>Power BI API</span><span>Typer</span></div>
-          </div>
-        </a>
-
-        <a class="project reveal d2" data-tags="api" href="https://github.com/" target="_blank" rel="noopener">
-          <div class="project-thumb">
-            <span class="badge">FastAPI</span>
-            <div class="codethumb">
-<span class="cm"># main.py</span><br/>
-<span class="kw">from</span> fastapi <span class="kw">import</span> FastAPI<br/>
-<span class="kw">from</span> pydantic <span class="kw">import</span> BaseModel<br/>
-<br/>
-app = <span class="df">FastAPI</span>(title=<span class="st">"forecast-api"</span>)<br/>
-<br/>
-<span class="kw">class</span> <span class="df">Query</span>(BaseModel):<br/>
-&nbsp;&nbsp;sku: str<br/>
-&nbsp;&nbsp;horizon: int = <span class="num">28</span><br/>
-<br/>
-<span class="fn">@app.post</span>(<span class="st">"/forecast"</span>)<br/>
-<span class="kw">def</span> <span class="df">forecast</span>(q: Query):<br/>
-&nbsp;&nbsp;y = <span class="df">predict</span>(q.sku, q.horizon)<br/>
-&nbsp;&nbsp;<span class="kw">return</span> {<span class="st">"sku"</span>: q.sku, <span class="st">"forecast"</span>: y}
-            </div>
-            <div class="open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M10 7h7v7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          </div>
-          <div class="project-body">
-            <h3>Demand Forecast Microservice</h3>
-            <p>FastAPI service wrapping a Prophet model — containerised, autoscaled and monitored on Azure.</p>
-            <div class="project-tags"><span>FastAPI</span><span>Prophet</span><span>Docker</span></div>
-          </div>
-        </a>
-
-        <a class="project reveal" data-tags="analysis ml" href="https://github.com/" target="_blank" rel="noopener">
-          <div class="project-thumb">
-            <span class="badge">NLP</span>
-            <div class="codethumb">
-<span class="cm"># reviews_topics.py</span><br/>
-<span class="kw">from</span> bertopic <span class="kw">import</span> BERTopic<br/>
-<span class="kw">from</span> sentence_transformers <span class="kw">import</span> SentenceTransformer<br/>
-<br/>
-emb = <span class="df">SentenceTransformer</span>(<span class="st">"all-MiniLM-L6-v2"</span>)<br/>
-topic_model = <span class="df">BERTopic</span>(embedding_model=emb, verbose=<span class="kw">True</span>)<br/>
-topics, probs = topic_model.<span class="fn">fit_transform</span>(reviews)<br/>
-<br/>
-<span class="cm"># top topics per hotel</span><br/>
-summary = (<br/>
-&nbsp;&nbsp;df.<span class="fn">assign</span>(topic=topics)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;.<span class="fn">groupby</span>([<span class="st">"hotel"</span>, <span class="st">"topic"</span>])<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;.size().<span class="fn">reset_index</span>(name=<span class="st">"n"</span>)<br/>
-)
-            </div>
-            <div class="open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M10 7h7v7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          </div>
-          <div class="project-body">
-            <h3>Guest Reviews · Topic Modeling</h3>
-            <p>BERTopic on hotel reviews to surface recurring themes by property and feed operations dashboards.</p>
-            <div class="project-tags"><span>BERTopic</span><span>Transformers</span><span>pandas</span></div>
-          </div>
-        </a>
-
-        <a class="project reveal d1" data-tags="analysis" href="https://github.com/" target="_blank" rel="noopener">
-          <div class="project-thumb">
-            <span class="badge">EDA</span>
-            <div class="pthumb variant-finance">
-              <div class="row">
-                <div class="cell"><div class="kpi-lbl">Rows</div><div class="kpi-num">4.1M</div></div>
-                <div class="cell"><div class="kpi-lbl">Features</div><div class="kpi-num">132</div></div>
-                <div class="cell"><div class="kpi-lbl">Missing</div><div class="kpi-num">2.4%</div></div>
-              </div>
-              <div class="row" style="flex:1">
-                <div class="cell tall">
-                  <svg viewBox="0 0 180 80">
-                    <g>
-                      <rect x="5"   y="20" width="10" height="50" fill="#9A7CFF" opacity=".4"/>
-                      <rect x="18"  y="12" width="10" height="58" fill="#9A7CFF" opacity=".55"/>
-                      <rect x="31"  y="8"  width="10" height="62" fill="#9A7CFF" opacity=".7"/>
-                      <rect x="44"  y="4"  width="10" height="66" fill="#9A7CFF"/>
-                      <rect x="57"  y="14" width="10" height="56" fill="#9A7CFF" opacity=".85"/>
-                      <rect x="70"  y="24" width="10" height="46" fill="#9A7CFF" opacity=".65"/>
-                      <rect x="83"  y="36" width="10" height="34" fill="#9A7CFF" opacity=".5"/>
-                      <rect x="96"  y="46" width="10" height="24" fill="#9A7CFF" opacity=".4"/>
-                      <rect x="109" y="52" width="10" height="18" fill="#9A7CFF" opacity=".35"/>
-                      <rect x="122" y="58" width="10" height="12" fill="#9A7CFF" opacity=".3"/>
-                      <rect x="135" y="62" width="10" height="8"  fill="#9A7CFF" opacity=".25"/>
-                      <rect x="148" y="66" width="10" height="4"  fill="#9A7CFF" opacity=".2"/>
-                    </g>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div class="open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M10 7h7v7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          </div>
-          <div class="project-body">
-            <h3>Transaction EDA Notebook</h3>
-            <p>Exploratory analysis of 4M payment transactions — outliers, drift and cohort behaviour.</p>
-            <div class="project-tags"><span>pandas</span><span>Plotly</span><span>Jupyter</span></div>
-          </div>
-        </a>
-
-        <a class="project reveal d2" data-tags="automation" href="https://github.com/" target="_blank" rel="noopener">
-          <div class="project-thumb">
-            <span class="badge">Scraper</span>
-            <div class="codethumb">
-<span class="cm"># rates_scraper.py</span><br/>
-<span class="kw">import</span> httpx, asyncio<br/>
-<span class="kw">from</span> selectolax.parser <span class="kw">import</span> HTMLParser<br/>
-<br/>
-<span class="kw">async def</span> <span class="df">fetch</span>(client, url):<br/>
-&nbsp;&nbsp;r = <span class="kw">await</span> client.<span class="fn">get</span>(url, timeout=<span class="num">10</span>)<br/>
-&nbsp;&nbsp;<span class="kw">return</span> <span class="df">HTMLParser</span>(r.text)<br/>
-<br/>
-<span class="kw">async def</span> <span class="df">main</span>(urls):<br/>
-&nbsp;&nbsp;<span class="kw">async with</span> httpx.<span class="df">AsyncClient</span>() <span class="kw">as</span> c:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="kw">await</span> asyncio.<span class="fn">gather</span>(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*(<span class="df">fetch</span>(c, u) <span class="kw">for</span> u <span class="kw">in</span> urls)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;)
-            </div>
-            <div class="open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M10 7h7v7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          </div>
-          <div class="project-body">
-            <h3>Competitor Rate Scraper</h3>
-            <p>Async scraper pulling nightly competitor prices into a rate-shop Power BI dashboard.</p>
-            <div class="project-tags"><span>httpx</span><span>asyncio</span><span>Selectolax</span></div>
-          </div>
-        </a>
-
+        </div>
       </div>
     </div>
   </section>
@@ -243,15 +87,15 @@ summary = (<br/>
 
 <footer class="footer">
   <div class="container">
-    <div>© 2026 Gabriele Toscano</div>
+    <div>© 2026 Gabriele Toscano · Built with care in Madrid.</div>
     <div class="footer-links">
-      <a href="/cdn-cgi/l/email-protection#ddb5b8b1b1b29dbabcbfafb4b8b1b8a9b2aebebcb3b2f3b9b8ab">Email</a>
-      <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:gabrieleetoscano@outlook.it">Email</a>
+      <a href="https://www.linkedin.com/in/gabriele-toscano-928188234/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/gabrieleetoscano" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

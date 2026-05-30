@@ -784,6 +784,47 @@ section + section { padding-top: 40px; }
 .page-header h1 { margin-top: 14px; font-size: clamp(2rem, 4vw, 3.25rem); }
 .page-header p.lead { margin-top: 14px; max-width: 64ch; font-size: 1.05rem; }
 
+/* ---------- Coming Soon ---------- */
+.coming-soon-wrap {
+  max-width: 620px;
+  margin: 48px auto 0;
+}
+.coming-soon-card {
+  text-align: center;
+  padding: 72px 48px;
+  border-radius: var(--r-xl);
+  background: #FFFFFF;
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-2);
+  position: relative;
+  overflow: hidden;
+}
+.coming-soon-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(70% 50% at 50% 0%, rgba(79,107,255,0.09), transparent 70%);
+  pointer-events: none;
+}
+.coming-soon-icon {
+  width: 72px; height: 72px;
+  margin: 0 auto 28px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(79,107,255,0.10), rgba(122,92,255,0.10));
+  border: 1px solid rgba(79,107,255,0.18);
+  display: grid; place-items: center;
+  color: var(--accent);
+}
+.coming-soon-card h2 { margin-bottom: 14px; }
+.coming-soon-card > p { max-width: 44ch; margin: 0 auto 36px; }
+.coming-soon-card .chips { justify-content: center; margin-top: 28px; }
+.coming-soon-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text-mute);
+  margin-bottom: 14px;
+}
+
 /* ---------- Footer ---------- */
 .footer {
   margin-top: 80px;
