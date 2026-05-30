@@ -490,19 +490,80 @@ section + section { padding-top: 40px; }
 .cert-body h4 { font-size: 13.5px; font-weight: 600; margin: 0; letter-spacing: -0.005em; }
 .cert-body p { font-size: 11.5px; color: var(--text-mute); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
 
+/* Image-based logo containers */
+.tl-logo-img {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+}
+.tl-logo-img img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  padding: 6px;
+  border-radius: 14px;
+}
+.tl-fallback {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  background: var(--grad-brand);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+.tl-logo-img img + .tl-fallback { display: none; }
+
+.cert-logo-img {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.cert-logo-img img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+
+/* Languages row */
+.lang-row { margin-top: 28px; }
+.lang-chips {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-top: 14px;
+}
+.lang-chip {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  transition: border-color .2s, transform .2s;
+}
+.lang-chip:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+.lang-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.lang-level {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .08em;
+  padding: 3px 8px; border-radius: 999px;
+  font-weight: 600;
+}
+.lang-level.native   { background: rgba(16,185,129,0.12); color: #059669; border: 1px solid rgba(16,185,129,0.25); }
+.lang-level.bilingual{ background: rgba(79,107,255,0.10); color: #3A52D4; border: 1px solid rgba(79,107,255,0.20); }
+.lang-level.c1       { background: rgba(122,92,255,0.10); color: #6040cc; border: 1px solid rgba(122,92,255,0.20); }
+.lang-level.b1       { background: rgba(22,182,201,0.10); color: #0e8fa0; border: 1px solid rgba(22,182,201,0.20); }
+
 /* Brand color tiles */
-.bg-ibm    { background: linear-gradient(180deg, #0f62fe, #001d6c); color: #fff; border-color: transparent; }
-.bg-goog   { background: linear-gradient(180deg, #4285f4, #1a73e8); color: #fff; border-color: transparent; }
-.bg-ms     { background: linear-gradient(180deg, #2a2a2a, #111); color: #fff; border-color: transparent; }
-.bg-aws    { background: linear-gradient(180deg, #ff9900, #cc7a00); color: #1a1a1a; border-color: transparent; font-weight: 800; }
-.bg-dbx    { background: linear-gradient(180deg, #ff3621, #a1281a); color: #fff; border-color: transparent; }
-.bg-snow   { background: linear-gradient(180deg, #29b5e8, #147eaa); color: #fff; border-color: transparent; }
-.bg-meta   { background: linear-gradient(180deg, #0866ff, #0047b3); color: #fff; border-color: transparent; }
-.bg-ayesa  { background: linear-gradient(180deg, #e40046, #9c0030); color: #fff; border-color: transparent; }
-.bg-tr     { background: linear-gradient(180deg, #004a98, #002e60); color: #fff; border-color: transparent; }
-.bg-minor  { background: linear-gradient(180deg, #1f2d4d, #0b132b); color: #fff; border-color: transparent; }
-.bg-politec{ background: linear-gradient(180deg, #002b54, #00152a); color: #fff; border-color: transparent; }
-.bg-dataf  { background: linear-gradient(180deg, #7c3aed, #4c1d95); color: #fff; border-color: transparent; }
+.bg-ms      { background: linear-gradient(180deg, #2a2a2a, #111); color: #fff; border-color: transparent; }
+.bg-ayesa   { background: linear-gradient(180deg, #1a0099, #0d0055); color: #fff; border-color: transparent; }
+.bg-tr      { background: linear-gradient(180deg, #3a8bc4, #1a5f90); color: #fff; border-color: transparent; }
+.bg-minor   { background: linear-gradient(180deg, #1a2744, #0d1530); color: #fff; border-color: transparent; }
+.bg-ue      { background: linear-gradient(180deg, #e63329, #c0241a); color: #fff; border-color: transparent; }
+.bg-ucm     { background: linear-gradient(180deg, #7a1a1a, #4e0f0f); color: #fff; border-color: transparent; }
+.bg-bandini { background: linear-gradient(180deg, #1a5276, #0d2744); color: #fff; border-color: transparent; }
+.bg-oracle  { background: linear-gradient(180deg, #c74634, #9e2d1e); color: #fff; border-color: transparent; }
+.bg-pmi     { background: linear-gradient(180deg, #5c3317, #3d1f0d); color: #fff; border-color: transparent; }
+.bg-openedg { background: linear-gradient(180deg, #2d7a22, #1a5514); color: #fff; border-color: transparent; }
+.bg-mos     { background: linear-gradient(180deg, #1e6b1e, #0f3d0f); color: #fff; border-color: transparent; }
 
 /* ---------- Skills ---------- */
 .skill-groups {
