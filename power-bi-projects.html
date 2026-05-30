@@ -141,46 +141,43 @@
   </div>
 </footer>
 
-<!-- Report modal overlay -->
-<div class="report-modal" id="reportModal" role="dialog" aria-modal="true" aria-label="Report viewer">
-  <button class="report-modal-close" id="reportClose" aria-label="Close report">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M19 12H5m0 0 6 6m-6-6 6-6"/>
-    </svg>
-    Back
-  </button>
-  <iframe id="reportFrame" src="" frameborder="0" allowfullscreen="true" title="Power BI Report"></iframe>
+<!-- Report view — in-page, below navbar -->
+<div class="report-view" id="reportView" role="dialog" aria-modal="true" aria-label="Report viewer">
+  <div class="report-view-wrap">
+    <button class="report-view-close" id="reportClose" aria-label="Close report">&#x2715;</button>
+    <iframe id="reportFrame" src="" frameborder="0" allowfullscreen="true" title="Power BI Report"></iframe>
+  </div>
 </div>
 
 <script src="js/main.js"></script>
 <script>
   (function () {
-    const modal   = document.getElementById('reportModal');
-    const frame   = document.getElementById('reportFrame');
+    const view     = document.getElementById('reportView');
+    const frame    = document.getElementById('reportFrame');
     const closeBtn = document.getElementById('reportClose');
 
-    function openModal(url) {
+    function openView(url) {
       frame.src = url;
-      modal.classList.add('open');
+      view.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
-    function closeModal() {
-      modal.classList.remove('open');
+    function closeView() {
+      view.classList.remove('open');
       document.body.style.overflow = '';
-      setTimeout(function () { frame.src = ''; }, 300);
+      setTimeout(function () { frame.src = ''; }, 250);
     }
 
     document.querySelectorAll('.project[data-embed]').forEach(function (card) {
       card.addEventListener('click', function () {
-        openModal(card.dataset.embed);
+        openView(card.dataset.embed);
       });
     });
 
-    closeBtn.addEventListener('click', closeModal);
+    closeBtn.addEventListener('click', closeView);
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+      if (e.key === 'Escape' && view.classList.contains('open')) closeView();
     });
   })();
 </script>
