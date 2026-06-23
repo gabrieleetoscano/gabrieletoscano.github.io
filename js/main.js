@@ -1,6 +1,7 @@
 /* ---------- Nav: active state ---------- */
 (function activeNav() {
-  const path = (location.pathname.split('/').pop() || 'home.html').toLowerCase();
+  const parts = location.pathname.split('/').filter(Boolean);
+  const path = (parts.pop() || 'home').toLowerCase();
   document.querySelectorAll('[data-nav]').forEach(a => {
     const target = (a.getAttribute('data-nav') || '').toLowerCase();
     if (target === path) a.classList.add('active');
